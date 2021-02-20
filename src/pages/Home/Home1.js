@@ -1,14 +1,13 @@
-import { Bar, Bubble, Doughnut } from "react-chartjs-2";
+import { Bar, Bubble } from "react-chartjs-2";
 import {
   NewsCard,
   PostCard,
-  ProfileCard,
   StatCard,
   WeatherCard,
   Wrapper
 } from "../../components";
 import React, { useState } from "react";
-import { mockDashboard, mockFeed, mockChart } from "../../utils/mock";
+import { mockDashboard, mockFeed } from "../../utils/mock";
 
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
@@ -54,26 +53,11 @@ const data = [
   createData("Extensive testing", "December 25", 56)
 ];
 
-const Home = () => {
+const Home1 = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = event => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
-
-  const [stats] = useState([
-    {
-      title: "Comments",
-      value: 24
-    },
-    {
-      title: "Likes",
-      value: 45
-    },
-    {
-      title: "Shares",
-      value: 984
-    }
-  ]);
 
   const chartMenu = (
     <Menu
@@ -112,15 +96,40 @@ const Home = () => {
   return (
     <Wrapper>
       <Grid container spacing={1}>
-
-
-        <Grid item xs={12} sm={12} md={12}>
-          
-          <ProfileCard
-            name={"Michael Obrien"}
-            image={`${process.env.PUBLIC_URL}/static/images/avatar.jpg`}
-            location={"London, Uk"}
-            stats={stats}
+        <Grid item xs={12} sm={6} md={3}>
+          <StatCard
+            type="fill"
+            title="Campaigns"
+            value={103}
+            icon={<LocalOfferIcon />}
+            color="#3f51b5"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <StatCard
+            type="fill"
+            title="Customers"
+            value={230}
+            icon={<PhoneIcon />}
+            color="#9c27b0"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <StatCard
+            type="fill"
+            title="Queries"
+            value={323}
+            icon={<NotificationsIcon />}
+            color="#f44336"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <StatCard
+            type="fill"
+            title="Opens"
+            value={870}
+            icon={<EmailIcon />}
+            color="#ffd740"
           />
         </Grid>
         {chartMenu}
@@ -136,24 +145,20 @@ const Home = () => {
                 }
               />
               <CardContent>
-                
-                {chart.type === 'doughnut' && (
-                  <Doughnut
-                    data={chart.data}
-                    height={chart.height}
-                    options={chart.options}
-                  />
-                )}
-
                 {chart.type === "bar" && (
                   <Bar
                     data={chart.data}
                     height={chart.height}
                     options={chart.options}
                   />
-
-                  )}
-
+                )}
+                {chart.type === "bubble" && (
+                  <Bubble
+                    data={chart.data}
+                    height={chart.height}
+                    options={chart.options}
+                  />
+                )}
               </CardContent>
             </Card>
           </Grid>
@@ -163,7 +168,7 @@ const Home = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Projects</TableCell>
+                  <TableCell>Projectasdasd</TableCell>
                   <TableCell>Due Date</TableCell>
                   <TableCell>Current Progress</TableCell>
                 </TableRow>
@@ -189,9 +194,29 @@ const Home = () => {
             </Table>
           </Paper>
         </Grid>
+        <Grid item xs={12} sm={12} md={4}>
+          <NewsCard subtitle="Last updated 24 mins ago" feed={mockFeed} />
+        </Grid>
+        <Grid item sm={12} md={6}>
+          <PostCard
+            title="Shrimp and Chorizo Paella"
+            subtitle="Yesterday"
+            image={`${process.env.PUBLIC_URL}/static/images/unsplash/2.jpg`}
+            imageHeight={200}
+            text="Phileas Fogg and Aouda went on board, where they found Fix already installed. Below deck was a square cabin, of which the walls bulged out in the form of cots, above a circular divan; in the centre was a table provided with a swinging lamp."
+            avatar={
+              <Avatar aria-label="Post" style={{ backgroundColor: red[500] }}>
+                R
+              </Avatar>
+            }
+          />
+        </Grid>
+        <Grid item sm={12} md={6}>
+          <WeatherCard city="london" country="uk" days={7} />
+        </Grid>
       </Grid>
     </Wrapper>
   );
 };
 
-export default Home;
+export default Home1;

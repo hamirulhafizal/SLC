@@ -2,6 +2,7 @@ import {
   data,
   dataBubble,
   dataMixed,
+  dataDoughnut,
   gridOptions,
   height,
   options,
@@ -10,6 +11,21 @@ import {
 } from './chart';
 
 export default [
+  {
+    type: 'doughnut',
+    title: 'Misc',
+    subtitle: 'Doughnut',
+    data: dataDoughnut,
+    height: height,
+    options: {
+      ...sharedOptions,
+      elements: {
+        arc: {
+          borderWidth: 0
+        }
+      }
+    }
+  },
   {
     type: 'bar',
     title: 'Revenue',
@@ -34,14 +50,4 @@ export default [
       ...options
     }
   },
-  {
-    type: 'bubble',
-    title: 'Sales Report',
-    subtitle: '+2,50%',
-    data: dataBubble,
-    height: height,
-    options: {
-      ...sharedOptions
-    }
-  }
 ];
